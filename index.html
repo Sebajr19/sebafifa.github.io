@@ -1,0 +1,2863 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mi fixture Mundial 2026 · Hora Chile</title>
+  <meta name="description" content="Fixture personal del Mundial 2026 con horarios en Chile, banderas y próximo partido destacado.">
+  <style>
+    :root {
+      --bg: #07111f;
+      --panel: rgba(255,255,255,.08);
+      --panel-strong: rgba(255,255,255,.13);
+      --text: #f7fbff;
+      --muted: #b5c3d5;
+      --line: rgba(255,255,255,.14);
+      --accent: #84e2ff;
+      --accent-2: #b8ff8f;
+      --danger: #ffcd7a;
+      --shadow: 0 20px 60px rgba(0,0,0,.35);
+      --radius: 22px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at top left, rgba(132,226,255,.20), transparent 30rem),
+        radial-gradient(circle at 85% 10%, rgba(184,255,143,.15), transparent 26rem),
+        linear-gradient(135deg, #07111f 0%, #0d1728 45%, #101826 100%);
+      color: var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    a { color: inherit; }
+    .wrap { width: min(1180px, calc(100% - 28px)); margin: 0 auto; }
+    header {
+      padding: 42px 0 20px;
+    }
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(320px, .9fr);
+      gap: 18px;
+      align-items: stretch;
+    }
+    @media (max-width: 850px) {
+      .hero { grid-template-columns: 1fr; }
+    }
+    .glass {
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(255,255,255,.12), rgba(255,255,255,.06));
+      box-shadow: var(--shadow);
+      border-radius: var(--radius);
+      backdrop-filter: blur(18px);
+    }
+    .title-card { padding: 28px; overflow: hidden; position: relative; }
+    .title-card::after {
+      content: "";
+      position: absolute;
+      inset: auto -90px -110px auto;
+      width: 260px;
+      height: 260px;
+      border-radius: 999px;
+      background: rgba(132,226,255,.12);
+      filter: blur(4px);
+    }
+    .eyebrow {
+      margin: 0 0 10px;
+      color: var(--accent);
+      font-weight: 800;
+      letter-spacing: .09em;
+      text-transform: uppercase;
+      font-size: .78rem;
+    }
+    h1 {
+      margin: 0;
+      font-size: clamp(2.1rem, 6vw, 5rem);
+      line-height: .92;
+      letter-spacing: -.07em;
+      max-width: 820px;
+    }
+    .subtitle {
+      margin: 18px 0 0;
+      color: var(--muted);
+      max-width: 680px;
+      font-size: 1rem;
+      line-height: 1.55;
+    }
+    .next-card {
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 300px;
+    }
+    .next-label {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      color: var(--accent-2);
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      font-size: .76rem;
+    }
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 7px 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.09);
+      border: 1px solid var(--line);
+      white-space: nowrap;
+      color: var(--text);
+      font-size: .78rem;
+      font-weight: 800;
+    }
+    .next-teams {
+      margin: 22px 0;
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      gap: 10px;
+    }
+    .next-team {
+      text-align: center;
+      min-width: 0;
+    }
+    .next-team .big-flag {
+      width: 66px;
+      height: 48px;
+      object-fit: cover;
+      border-radius: 12px;
+      box-shadow: 0 10px 28px rgba(0,0,0,.25);
+      border: 1px solid rgba(255,255,255,.25);
+      background: rgba(255,255,255,.10);
+    }
+    .next-team .flag-fallback {
+      width: 66px;
+      height: 48px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.2rem;
+      border-radius: 12px;
+      background: rgba(255,255,255,.10);
+      border: 1px solid rgba(255,255,255,.16);
+    }
+    .next-team strong {
+      display: block;
+      margin-top: 10px;
+      font-size: clamp(1rem, 2.7vw, 1.35rem);
+      overflow-wrap: anywhere;
+    }
+    .vs {
+      color: var(--muted);
+      font-weight: 950;
+      letter-spacing: -.04em;
+    }
+    .next-time {
+      border-top: 1px solid var(--line);
+      padding-top: 16px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      color: var(--muted);
+      font-size: .95rem;
+    }
+    .next-time strong {
+      color: var(--text);
+      display: block;
+      font-size: 1.25rem;
+      margin-top: 3px;
+    }
+    .toolbar {
+      margin: 20px 0 18px;
+      padding: 14px;
+      display: grid;
+      grid-template-columns: 1fr 190px 180px;
+      gap: 10px;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      border-radius: 18px;
+    }
+    @media (max-width: 760px) {
+      .toolbar {
+        grid-template-columns: 1fr;
+        position: static;
+      }
+    }
+    input, select, button {
+      width: 100%;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.09);
+      color: var(--text);
+      padding: 13px 14px;
+      border-radius: 14px;
+      font: inherit;
+      outline: none;
+    }
+    input::placeholder { color: rgba(255,255,255,.55); }
+    select option { color: #07111f; }
+    button {
+      cursor: pointer;
+      font-weight: 900;
+      background: linear-gradient(135deg, rgba(132,226,255,.24), rgba(184,255,143,.18));
+    }
+    button:hover, input:focus, select:focus {
+      border-color: rgba(132,226,255,.65);
+    }
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin-bottom: 22px;
+    }
+    @media (max-width: 760px) {
+      .stats { grid-template-columns: repeat(2, 1fr); }
+    }
+    .stat {
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: rgba(255,255,255,.06);
+    }
+    .stat span {
+      display: block;
+      color: var(--muted);
+      font-size: .75rem;
+      text-transform: uppercase;
+      letter-spacing: .07em;
+      font-weight: 800;
+    }
+    .stat strong {
+      display: block;
+      font-size: 1.6rem;
+      line-height: 1.1;
+      margin-top: 4px;
+    }
+    .date-group {
+      margin: 24px 0;
+    }
+    .date-title {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+      margin: 0 0 12px;
+    }
+    .date-title h2 {
+      margin: 0;
+      font-size: clamp(1.2rem, 3vw, 2rem);
+      letter-spacing: -.04em;
+    }
+    .date-title span {
+      color: var(--muted);
+      font-weight: 800;
+      font-size: .84rem;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+    @media (max-width: 1000px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 640px) { .grid { grid-template-columns: 1fr; } }
+    .match {
+      position: relative;
+      padding: 16px;
+      border-radius: 20px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.07);
+      overflow: hidden;
+    }
+    .match.next {
+      border-color: rgba(184,255,143,.76);
+      box-shadow: 0 0 0 1px rgba(184,255,143,.18), 0 18px 45px rgba(0,0,0,.30);
+    }
+    .match.live {
+      border-color: rgba(255,205,122,.85);
+      box-shadow: 0 0 0 1px rgba(255,205,122,.20), 0 18px 45px rgba(0,0,0,.30);
+    }
+    .match.done {
+      opacity: .70;
+    }
+    .match-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 16px;
+      color: var(--muted);
+      font-weight: 850;
+      font-size: .83rem;
+    }
+    .match-no {
+      color: var(--text);
+    }
+    .time {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--text);
+      padding: 7px 9px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(0,0,0,.15);
+      white-space: nowrap;
+    }
+    .teams {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      gap: 8px;
+      align-items: center;
+    }
+    .team {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      min-width: 0;
+    }
+    .team.away {
+      justify-content: flex-end;
+      text-align: right;
+    }
+    .team-name {
+      font-weight: 900;
+      line-height: 1.15;
+      overflow-wrap: anywhere;
+    }
+    .flag {
+      width: 34px;
+      height: 24px;
+      object-fit: cover;
+      border-radius: 6px;
+      border: 1px solid rgba(255,255,255,.22);
+      background: rgba(255,255,255,.10);
+      flex: 0 0 auto;
+    }
+    .flagEmoji {
+      width: 34px;
+      height: 24px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 6px;
+      background: rgba(255,255,255,.10);
+      border: 1px solid rgba(255,255,255,.16);
+      flex: 0 0 auto;
+      font-size: 1.2rem;
+    }
+    .score {
+      margin: 0 4px;
+      color: var(--accent-2);
+      font-weight: 950;
+      white-space: nowrap;
+    }
+    .match-foot {
+      margin-top: 15px;
+      padding-top: 12px;
+      border-top: 1px solid var(--line);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      color: var(--muted);
+      font-size: .82rem;
+    }
+    .stage-tag {
+      color: var(--accent);
+      font-weight: 900;
+    }
+    .hidden { display: none !important; }
+    .empty {
+      padding: 24px;
+      border-radius: 18px;
+      border: 1px dashed var(--line);
+      color: var(--muted);
+      text-align: center;
+      margin: 24px 0;
+    }
+    footer {
+      color: var(--muted);
+      padding: 24px 0 38px;
+      font-size: .85rem;
+      line-height: 1.55;
+    }
+    footer .links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 10px;
+    }
+    footer a {
+      color: var(--accent);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(132,226,255,.4);
+    }
+    .sr-only {
+      position:absolute;
+      width:1px;
+      height:1px;
+      padding:0;
+      margin:-1px;
+      overflow:hidden;
+      clip:rect(0,0,0,0);
+      white-space:nowrap;
+      border:0;
+    }
+  </style>
+</head>
+<body>
+  <header class="wrap">
+    <section class="hero">
+      <div class="glass title-card">
+        <p class="eyebrow">Hora Chile continental · Mundial 2026</p>
+        <h1>Mi fixture personal</h1>
+        <p class="subtitle">
+          Calendario simple para revisar rápido los partidos, horarios en Chile, banderas y el próximo encuentro destacado automáticamente.
+        </p>
+      </div>
+      <aside class="glass next-card" id="nextCard" aria-live="polite">
+        <div class="next-label">
+          <span>Próximo partido</span>
+          <span class="pill" id="nextStatus">Calculando…</span>
+        </div>
+        <div id="nextContent"></div>
+      </aside>
+    </section>
+  </header>
+
+  <main class="wrap">
+    <section class="glass toolbar" aria-label="Filtros del fixture">
+      <label class="sr-only" for="search">Buscar selección o sede</label>
+      <input id="search" type="search" placeholder="Buscar país, grupo, sede o fase…">
+      <label class="sr-only" for="stage">Filtrar por fase</label>
+      <select id="stage">
+        <option value="all">Todas las fases</option>
+        <option value="Fase de grupos">Fase de grupos</option>
+        <option value="16avos de final">16avos de final</option>
+        <option value="Octavos de final">Octavos de final</option>
+        <option value="Cuartos de final">Cuartos de final</option>
+        <option value="Semifinal">Semifinales</option>
+        <option value="Tercer puesto">Tercer puesto</option>
+        <option value="Final">Final</option>
+      </select>
+      <button id="upcomingBtn" type="button" aria-pressed="false">Ver solo próximos</button>
+    </section>
+
+    <section class="stats" aria-label="Resumen">
+      <div class="stat"><span>Total</span><strong id="statTotal">104</strong></div>
+      <div class="stat"><span>Por jugar</span><strong id="statUpcoming">—</strong></div>
+      <div class="stat"><span>Hoy</span><strong id="statToday">—</strong></div>
+      <div class="stat"><span>Hora base</span><strong>CHI</strong></div>
+    </section>
+
+    <section id="fixture"></section>
+    <div id="empty" class="empty hidden">No encontré partidos con esos filtros.</div>
+  </main>
+
+  <footer class="wrap">
+    <p>
+      Datos cargados manualmente para uso personal. Los horarios están expresados en Chile continental
+      con zona <strong>America/Santiago</strong>. En fases eliminatorias, las banderas aparecen como trofeo hasta que se definan los clasificados.
+    </p>
+    <div class="links">
+      <a href="https://www.fifa.com/es/tournaments/mens/worldcup/canadamexicousa2026/articles/calendario-fixture-mundial-2026-partidos-fechas" target="_blank" rel="noreferrer">Fixture FIFA</a>
+      <a href="https://www.espn.cl/futbol/mundial/nota/_/id/13191646/mundial-2026-fixture-calendario-fecha-horarios-y-sedes" target="_blank" rel="noreferrer">Fixture ESPN Chile</a>
+    </div>
+  </footer>
+
+<script>
+const MATCHES = [
+  {
+    "id": 1,
+    "date": "2026-06-11",
+    "time": "15:00",
+    "datetime": "2026-06-11T15:00:00-04:00",
+    "home": {
+      "name": "México",
+      "code": "mx",
+      "emoji": "🇲🇽"
+    },
+    "away": {
+      "name": "Sudáfrica",
+      "code": "za",
+      "emoji": "🇿🇦"
+    },
+    "stage": "Fase de grupos",
+    "group": "Grupo A",
+    "venue": "Estadio Azteca, Ciudad de México",
+    "result": "2-0",
+    "note": ""
+  },
+  {
+    "id": 2,
+    "date": "2026-06-11",
+    "time": "22:00",
+    "datetime": "2026-06-11T22:00:00-04:00",
+    "home": {
+      "name": "Corea del Sur",
+      "code": "kr",
+      "emoji": "🇰🇷"
+    },
+    "away": {
+      "name": "República Checa",
+      "code": "cz",
+      "emoji": "🇨🇿"
+    },
+    "stage": "Fase de grupos",
+    "group": "Grupo A",
+    "venue": "Estadio Akron, Guadalajara",
+    "result": "2-1",
+    "note": ""
+  },
+  {
+    "id": 3,
+    "date": "2026-06-12",
+    "time": "15:00",
+    "datetime": "2026-06-12T15:00:00-04:00",
+    "home": {
+      "name": "Canadá",
+      "code": "ca",
+      "emoji": "🇨🇦"
+    },
+    "away": {
+      "name": "Bosnia y Herzegovina",
+      "code": "ba",
+      "emoji": "🇧🇦"
+    },
+    "stage": "Fase de grupos",
+    "group": "Grupo B",
+    "venue": "BMO Field, Toronto",
+    "result": "1-1",
+    "note": ""
+  },
+  {
+    "id": 4,
+    "date": "2026-06-12",
+    "time": "21:00",
+    "datetime": "2026-06-12T21:00:00-04:00",
+    "home": {
+      "name": "Estados Unidos",
+      "code": "us",
+      "emoji": "🇺🇸"
+    },
+    "away": {
+      "name": "Paraguay",
+      "code": "py",
+      "emoji": "🇵🇾"
+    },
+    "stage": "Fase de grupos",
+    "group": "Grupo D",
+    "venue": "SoFi Stadium, Los Ángeles",
+    "result": "3-1",
+    "note": ""
+  },
+  {
+    "id": 5,
+    "date": "2026-06-13",
+    "time": "15:00",
+    "datetime": "2026-06-13T15:00:00-04:00",
+    "home": {
+      "name": "Catar",
+      "code": "qa",
+      "emoji": "🇶🇦"
+    },
+    "away": {
+      "name": "Suiza",
+      "code": "ch",
+      "emoji": "🇨🇭"
+    },
+    "stage": "Fase de grupos",
+    "group": "Grupo B",
+    "venue": "Levi’s Stadium, San Francisco",
+    "result": null,
+    "note": ""
+  },
+  {
+    "id": 6,
+    "date": "2026-06-13",
+    "time": "18:00",
+    "datetime": "2026-06-13T18:00:00-04:00",
+    "home": {
+      "name": "Brasil",
+      "code": "br",
+      "emoji": "🇧🇷"
+    },
+    "away": {
+      "name": "Marruecos",
+      "code": "ma",
+      "emoji": "🇲🇦"
+    },
+    "stage": "Fase de grupos",
+    "group": "Grupo C",
+    "venue": "MetLife Stadium, Nueva Jersey",
+    "result": null,
+    "note": ""
+  },
+  {
+    "id": 7,
+    "date": "2026-06-13",
+    "time": "21:00",
+    "datetime": "2026-06-13T21:00:00-04:00",
+    "home": {
+      "name": "Haití",
+      "code": "ht",
+      "emoji": "🇭🇹"
+    },
+    "away": {
+      "name": "Escocia",
+      "code": "gb-sct",
+      "emoji": "🏴"
+    },
+    "stage": "Fase de grupos",
+    "group": "Grupo C",
+    "venue": "Gillette Stadium, Boston",
+    "result": null,
+    "note": ""
+  },
+  {
+    "id": 8,
+    "date": "2026-06-14",
+    "time": "00:00",
+    "datetime": "2026-06-14T00:00:00-04:00",
+    "home": {
+      "name": "Australia",
+      "code": "au",
+      "emoji": "🇦🇺"
+    },
+    "away": {
+      "name": "Turquía",
+      "code": "tr",
+      "emoji": "🇹🇷"
+    },
+    "stage": "Fase de grupos",
+    "group": "Grupo D",
+    "venue": "BC Place, Vancouver",
+    "result": null,
+    "note": ""
+  },
+  {
+    "id": 9,
+    "date": "2026-06-14",
+    "time": "13:00",
+    "datetime": "2026-06-14T13:00:00-04:00",
+    "home": {
+      "name": "Alemania",
+      "code": "de",
+      "emoji": "🇩🇪"
+    },
+    "away": {
+      "name": "Curazao",
+      "code": "cw",
+      "emoji": "🇨🇼"
+    },
+    "stage": "Fase de grupos",
+    "group": "Grupo E",
+    "venue": "NRG Stadium, Houston",
+    "result": null,
+    "note": ""
+  },
+  {
+    "id": 10,
+    "date": "2026-06-14",
+    "time": "16:00",
+    "datetime": "2026-06-14T16:00:00-04:00",
+    "home": {
+      "name": "Países Bajos",
+      "code": "nl",
+      "emoji": "🇳🇱"
+    },
+    "away": {
+      "name": "Japón",
+      "code": "jp",
+      "emoji": "🇯🇵"
+    },
+    "stage": "Fase de grupos",
+    "group": "Grupo F",
+    "venue": "AT&T Stadium, Dallas",
+    "result": null,
+    "note": ""
+  },
+  {
+    "id": 11,
+    "date": "2026-06-14",
+    "time": "19:00",
+    "datetime": "2026-06-14T19:00:00-04:00",
+    "home": {
+      "name": "Costa de Marfil",
+      "code": "ci",
+      "emoji": "🇨🇮"
+    },
+    "away": {
+      "name": "Ecuador",
+      "code": "ec",
+      "emoji": "🇪🇨"
+    },
+    "stage": "Fase de grupos",
+    "group": "Grupo E",
+    "venue": "Lincoln Financial Field, Philadelphia",
+    "result": null,
+    "note": ""
+  },
+  {
+    "id": 12,
+    "date": "2026-06-14",
+    "time": "22:00",
+    "datetime": "2026-06-14T22:00:00-04:00",
+    "home": {
+      "name": "Suecia",
+      "code": "se",
+      "emoji": "🇸🇪"
+    },
+    "away": {
+      "name": "Túnez",
+      "code": "tn",
+      "emoji": "🇹🇳"
+    },
+    "stage": "Fase de grupos",
+    "group": "Grupo F",
+    "venue": "Estadio BBVA, Monterrey",
+    "result": null,
+    "note": ""
+  },
+  {
+    "id": 13,
+    "date": "2026-06-15",
+    "time": "12:00",
+    "datetime": "2026-06-15T12:00:00-04:00",
+    "home": {
+      "name": "España",
+      "code": "es",
+      "emoji": "🇪🇸"
+    },
+    "away": {
+      "name": "Cabo Verde",
+      "code": "cv",
+      "emoji": "🇨🇻"
+    },
+    "stage": "Fase de grupos",
+    "group": "Grupo H",
+    "venue": "Mercedes-Benz Stadium, Atlanta",
+    "result": null,
+    "note": ""
+  },
+  {
+    "id": 14,
+    "date": "2026-06-15",
+    "time": "15:00",
+    "datetime": "2026-06-15T15:00:00-04:00",
+    "home": {
+      "name": "Bélgica",
+      "code": "be",
+      "emoji": "🇧🇪"
+    },
+    "away": {
+      "name": "Egipto",
+      "code": "eg",
+      "emoji": "🇪🇬"
+    },
+    "stage": "Fase de grupos",
+    "group": "Grupo G",
+    "venue": "Lumen Field, Seattle",
+    "result": null,
+    "note": ""
+  },
+  {
+    "id": 15,
+    "date": "2026-06-15",
+    "time": "18:00",
+    "datetime": "2026-06-15T18:00:00-04:00",
+    "home": {
+      "name": "Arabia Saudita",
+      "code": "sa",
+      "emoji": "🇸🇦"
+    },
+    "away": {
+      "name": "Uruguay",
+      "code": "uy",
+      "emoji": "🇺🇾"
+    },
+    "stage": "Fase de grupos",
+    "group": "Grupo H",
+    "venue": "Hard Rock Stadium, Miami",
+    "result": null,
+    "note": ""
+  },
+  {
+    "id": 16,
+    "date": "2026-06-15",
+    "time": "21:00",
+    "datetime": "2026-06-15T21:00:00-04:00",
+    "home": {
+      "name": "Irán",
+      "code": "ir",
+      "emoji": "🇮🇷"
+    },
+    "away": {
+      "name": "Nueva Zelanda",
+      "code": "nz",
+      "emoji": "🇳🇿"
+    },
+    "stage": "Fase de grupos",
+    "group": "Grupo G",
+    "venue": "SoFi Stadium, Los Ángeles",
+    "result": null,
+    "note": ""
+  },
+  {
+    "id": 17,
+    "date": "2026-06-16",
+    "time": "15:00",
+    "datetime": "2026-06-16T15:00:00-04:00",
+    "home": {
+      "name": "Francia",
+      "code": "fr",
+      "emoji": "🇫🇷"
+    },
+    "away": {
+      "name": "Senegal",
+      "code": "sn",
+      "emoji": "🇸🇳"
+    },
+    "stage": "Fase de grupos",
+    "group": "Grupo I",
+    "venue": "MetLife Stadium, Nueva Jersey",
+    "result": null,
+    "note": ""
+  },
+  {
+    "id": 18,
+    "date": "2026-06-16",
+    "time": "18:00",
+    "datetime": "2026-06-16T18:00:00-04:00",
+    "home": {
+      "name": "Irak",
+      "code": "iq",
+      "emoji": "🇮🇶"
+    },
+    "away": {
+      "name": "Noruega",
+      "code": "no",
+      "emoji": "🇳🇴"
+    },
+    "stage": "Fase de grupos",
+    "group": "Grupo I",
+    "venue": "Gillette Stadium, Boston",
+    "result": null,
+    "note": ""
+  },
+  {
+    "id": 19,
+    "date": "2026-06-16",
+    "time": "21:00",
+    "datetime": "2026-06-16T21:00:00-04:00",
+    "home": {
+      "name": "Argentina",
+      "code": "ar",
+      "emoji": "🇦🇷"
+    },
+    "away": {
+      "name": "Argelia",
+      "code": "dz",
+      "emoji": "🇩🇿"
+    },
+    "stage": "Fase de grupos",
+    "group": "Grupo J",
+    "venue": "Arrowhead Stadium, Kansas City",
+    "result": null,
+    "note": ""
+  },
+  {
+    "id": 20,
+    "date": "2026-06-17",
+    "time": "00:00",
+    "datetime": "2026-06-17T00:00:00-04:00",
+    "home": {
+      "name": "Austria",
+      "code": "at",
+      "emoji": "🇦🇹"
+    },
+    "away": {
+      "name": "Jordania",
+      "code": "jo",
+      "emoji": "🇯🇴"
+    },
+    "stage": "Fase de grupos",
+    "group": "Grupo J",
+    "venue": "Levi’s Stadium, San Francisco",
+    "result": null,
+    "note": ""
+  },
+  {
+    "id": 21,
+    "date": "2026-06-17",
+    "time": "13:00",
+    "datetime": "2026-06-17T13:00:00-04:00",
+    "home": {
+      "name": "Portugal",
+      "code": "pt",
+      "emoji": "🇵🇹"
+    },
+    "away": {
+      "name": "RD Congo",
+      "code": "cd",
+      "emoji": "🇨🇩"
+    },
+    "stage": "Fase de grupos",
+    "group": "Grupo K",
+    "venue": "NRG Stadium, Houston",
+    "result": null,
+    "note": ""
+  },
+  {
+    "id": 22,
+    "date": "2026-06-17",
+    "time": "16:00",
+    "datetime": "2026-06-17T16:00:00-04:00",
+    "home": {
+      "name": "Inglaterra",
+      "code": "gb-eng",
+      "emoji": "🏴"
+    },
+    "away": {
+      "name": "Croacia",
+      "code": "hr",
+      "emoji": "🇭🇷"
+    },
+    "stage": "Fase de grupos",
+    "group": "Grupo L",
+    "venue": "AT&T Stadium, Dallas",
+    "result": null,
+    "note": ""
+  },
+  {
+    "id": 23,
+    "date": "2026-06-17",
+    "time": "19:00",
+    "datetime": "2026-06-17T19:00:00-04:00",
+    "home": {
+      "name": "Ghana",
+      "code": "gh",
+      "emoji": "🇬🇭"
+    },
+    "away": {
+      "name": "Panamá",
+      "code": "pa",
+      "emoji": "🇵🇦"
+    },
+    "stage": "Fase de grupos",
+    "group": "Grupo L",
+    "venue": "BMO Field, Toronto",
+    "result": null,
+    "note": ""
+  },
+  {
+    "id": 24,
+    "date": "2026-06-17",
+    "time": "22:00",
+    "datetime": "2026-06-17T22:00:00-04:00",
+    "home": {
+      "name": "Uzbekistán",
+      "code": "uz",
+      "emoji": "🇺🇿"
+    },
+    "away": {
+      "name": "Colombia",
+      "code": "co",
+      "emoji": "🇨🇴"
+    },
+    "stage": "Fase de grupos",
+    "group": "Grupo K",
+    "venue": "Estadio Azteca, Ciudad de México",
+    "result": null,
+    "note": ""
+  },
+  {
+    "id": 25,
+    "date": "2026-06-18",
+    "time": "12:00",
+    "datetime": "2026-06-18T12:00:00-04:00",
+    "home": {
+      "name": "República Checa",
+      "code": "cz",
+      "emoji": "🇨🇿"
+    },
+    "away": {
+      "name": "Sudáfrica",
+      "code": "za",
+      "emoji": "🇿🇦"
+    },
+    "stage": "Fase de grupos",
+    "group": "Grupo A",
+    "venue": "Mercedes-Benz Stadium, Atlanta",
+    "result": null,
+    "note": ""
+  },
+  {
+    "id": 26,
+    "date": "2026-06-18",
+    "time": "15:00",
+    "datetime": "2026-06-18T15:00:00-04:00",
+    "home": {
+      "name": "Suiza",
+      "code": "ch",
+      "emoji": "🇨🇭"
+    },
+    "away": {
+      "name": "Bosnia y Herzegovina",
+      "code": "ba",
+      "emoji": "🇧🇦"
+    },
+    "stage": "Fase de grupos",
+    "group": "Grupo B",
+    "venue": "SoFi Stadium, Los Ángeles",
+    "result": null,
+    "note": ""
+  },
+  {
+    "id": 27,
+    "date": "2026-06-18",
+    "time": "18:00",
+    "datetime": "2026-06-18T18:00:00-04:00",
+    "home": {
+      "name": "Canadá",
+      "code": "ca",
+      "emoji": "🇨🇦"
+    },
+    "away": {
+      "name": "Catar",
+      "code": "qa",
+      "emoji": "🇶🇦"
+    },
+    "stage": "Fase de grupos",
+    "group": "Grupo B",
+    "venue": "BC Place, Vancouver",
+    "result": null,
+    "note": ""
+  },
+  {
+    "id": 28,
+    "date": "2026-06-18",
+    "time": "21:00",
+    "datetime": "2026-06-18T21:00:00-04:00",
+    "home": {
+      "name": "México",
+      "code": "mx",
+      "emoji": "🇲🇽"
+    },
+    "away": {
+      "name": "Corea del Sur",
+      "code": "kr",
+      "emoji": "🇰🇷"
+    },
+    "stage": "Fase de grupos",
+    "group": "Grupo A",
+    "venue": "Estadio Akron, Guadalajara",
+    "result": null,
+    "note": ""
+  },
+  {
+    "id": 29,
+    "date": "2026-06-19",
+    "time": "15:00",
+    "datetime": "2026-06-19T15:00:00-04:00",
+    "home": {
+      "name": "Estados Unidos",
+      "code": "us",
+      "emoji": "🇺🇸"
+    },
+    "away": {
+      "name": "Australia",
+      "code": "au",
+      "emoji": "🇦🇺"
+    },
+    "stage": "Fase de grupos",
+    "group": "Grupo D",
+    "venue": "Lumen Field, Seattle",
+    "result": null,
+    "note": ""
+  },
+  {
+    "id": 30,
+    "date": "2026-06-19",
+    "time": "18:00",
+    "datetime": "2026-06-19T18:00:00-04:00",
+    "home": {
+      "name": "Escocia",
+      "code": "gb-sct",
+      "emoji": "🏴"
+    },
+    "away": {
+      "name": "Marruecos",
+      "code": "ma",
+      "emoji": "🇲🇦"
+    },
+    "stage": "Fase de grupos",
+    "group": "Grupo C",
+    "venue": "Gillette Stadium, Boston",
+    "result": null,
+    "note": ""
+  },
+  {
+    "id": 31,
+    "date": "2026-06-19",
+    "time": "20:30",
+    "datetime": "2026-06-19T20:30:00-04:00",
+    "home": {
+      "name": "Brasil",
+      "code": "br",
+      "emoji": "🇧🇷"
+    },
+    "away": {
+      "name": "Haití",
+      "code": "ht",
+      "emoji": "🇭🇹"
+    },
+    "stage": "Fase de grupos",
+    "group": "Grupo C",
+    "venue": "Lincoln Financial Field, Philadelphia",
+    "result": null,
+    "note": ""
+  },
+  {
+    "id": 32,
+    "date": "2026-06-19",
+    "time": "23:00",
+    "datetime": "2026-06-19T23:00:00-04:00",
+    "home": {
+      "name": "Turquía",
+      "code": "tr",
+      "emoji": "🇹🇷"
+    },
+    "away": {
+      "name": "Paraguay",
+      "code": "py",
+      "emoji": "🇵🇾"
+    },
+    "stage": "Fase de grupos",
+    "group": "Grupo D",
+    "venue": "Levi’s Stadium, San Francisco",
+    "result": null,
+    "note": ""
+  },
+  {
+    "id": 33,
+    "date": "2026-06-20",
+    "time": "13:00",
+    "datetime": "2026-06-20T13:00:00-04:00",
+    "home": {
+      "name": "Países Bajos",
+      "code": "nl",
+      "emoji": "🇳🇱"
+    },
+    "away": {
+      "name": "Suecia",
+      "code": "se",
+      "emoji": "🇸🇪"
+    },
+    "stage": "Fase de grupos",
+    "group": "Grupo F",
+    "venue": "NRG Stadium, Houston",
+    "result": null,
+    "note": ""
+  },
+  {
+    "id": 34,
+    "date": "2026-06-20",
+    "time": "16:00",
+    "datetime": "2026-06-20T16:00:00-04:00",
+    "home": {
+      "name": "Alemania",
+      "code": "de",
+      "emoji": "🇩🇪"
+    },
+    "away": {
+      "name": "Costa de Marfil",
+      "code": "ci",
+      "emoji": "🇨🇮"
+    },
+    "stage": "Fase de grupos",
+    "group": "Grupo E",
+    "venue": "BMO Field, Toronto",
+    "result": null,
+    "note": ""
+  },
+  {
+    "id": 35,
+    "date": "2026-06-20",
+    "time": "20:00",
+    "datetime": "2026-06-20T20:00:00-04:00",
+    "home": {
+      "name": "Ecuador",
+      "code": "ec",
+      "emoji": "🇪🇨"
+    },
+    "away": {
+      "name": "Curazao",
+      "code": "cw",
+      "emoji": "🇨🇼"
+    },
+    "stage": "Fase de grupos",
+    "group": "Grupo E",
+    "venue": "Arrowhead Stadium, Kansas City",
+    "result": null,
+    "note": ""
+  },
+  {
+    "id": 36,
+    "date": "2026-06-21",
+    "time": "00:00",
+    "datetime": "2026-06-21T00:00:00-04:00",
+    "home": {
+      "name": "Túnez",
+      "code": "tn",
+      "emoji": "🇹🇳"
+    },
+    "away": {
+      "name": "Japón",
+      "code": "jp",
+      "emoji": "🇯🇵"
+    },
+    "stage": "Fase de grupos",
+    "group": "Grupo F",
+    "venue": "Estadio BBVA, Monterrey",
+    "result": null,
+    "note": ""
+  },
+  {
+    "id": 37,
+    "date": "2026-06-21",
+    "time": "12:00",
+    "datetime": "2026-06-21T12:00:00-04:00",
+    "home": {
+      "name": "España",
+      "code": "es",
+      "emoji": "🇪🇸"
+    },
+    "away": {
+      "name": "Arabia Saudita",
+      "code": "sa",
+      "emoji": "🇸🇦"
+    },
+    "stage": "Fase de grupos",
+    "group": "Grupo H",
+    "venue": "Mercedes-Benz Stadium, Atlanta",
+    "result": null,
+    "note": ""
+  },
+  {
+    "id": 38,
+    "date": "2026-06-21",
+    "time": "15:00",
+    "datetime": "2026-06-21T15:00:00-04:00",
+    "home": {
+      "name": "Bélgica",
+      "code": "be",
+      "emoji": "🇧🇪"
+    },
+    "away": {
+      "name": "Irán",
+      "code": "ir",
+      "emoji": "🇮🇷"
+    },
+    "stage": "Fase de grupos",
+    "group": "Grupo G",
+    "venue": "SoFi Stadium, Los Ángeles",
+    "result": null,
+    "note": ""
+  },
+  {
+    "id": 39,
+    "date": "2026-06-21",
+    "time": "18:00",
+    "datetime": "2026-06-21T18:00:00-04:00",
+    "home": {
+      "name": "Uruguay",
+      "code": "uy",
+      "emoji": "🇺🇾"
+    },
+    "away": {
+      "name": "Cabo Verde",
+      "code": "cv",
+      "emoji": "🇨🇻"
+    },
+    "stage": "Fase de grupos",
+    "group": "Grupo H",
+    "venue": "Hard Rock Stadium, Miami",
+    "result": null,
+    "note": ""
+  },
+  {
+    "id": 40,
+    "date": "2026-06-21",
+    "time": "21:00",
+    "datetime": "2026-06-21T21:00:00-04:00",
+    "home": {
+      "name": "Nueva Zelanda",
+      "code": "nz",
+      "emoji": "🇳🇿"
+    },
+    "away": {
+      "name": "Egipto",
+      "code": "eg",
+      "emoji": "🇪🇬"
+    },
+    "stage": "Fase de grupos",
+    "group": "Grupo G",
+    "venue": "BC Place, Vancouver",
+    "result": null,
+    "note": ""
+  },
+  {
+    "id": 41,
+    "date": "2026-06-22",
+    "time": "13:00",
+    "datetime": "2026-06-22T13:00:00-04:00",
+    "home": {
+      "name": "Argentina",
+      "code": "ar",
+      "emoji": "🇦🇷"
+    },
+    "away": {
+      "name": "Austria",
+      "code": "at",
+      "emoji": "🇦🇹"
+    },
+    "stage": "Fase de grupos",
+    "group": "Grupo J",
+    "venue": "AT&T Stadium, Dallas",
+    "result": null,
+    "note": ""
+  },
+  {
+    "id": 42,
+    "date": "2026-06-22",
+    "time": "17:00",
+    "datetime": "2026-06-22T17:00:00-04:00",
+    "home": {
+      "name": "Francia",
+      "code": "fr",
+      "emoji": "🇫🇷"
+    },
+    "away": {
+      "name": "Irak",
+      "code": "iq",
+      "emoji": "🇮🇶"
+    },
+    "stage": "Fase de grupos",
+    "group": "Grupo I",
+    "venue": "Lincoln Financial Field, Philadelphia",
+    "result": null,
+    "note": ""
+  },
+  {
+    "id": 43,
+    "date": "2026-06-22",
+    "time": "20:00",
+    "datetime": "2026-06-22T20:00:00-04:00",
+    "home": {
+      "name": "Noruega",
+      "code": "no",
+      "emoji": "🇳🇴"
+    },
+    "away": {
+      "name": "Senegal",
+      "code": "sn",
+      "emoji": "🇸🇳"
+    },
+    "stage": "Fase de grupos",
+    "group": "Grupo I",
+    "venue": "MetLife Stadium, Nueva Jersey",
+    "result": null,
+    "note": ""
+  },
+  {
+    "id": 44,
+    "date": "2026-06-22",
+    "time": "23:00",
+    "datetime": "2026-06-22T23:00:00-04:00",
+    "home": {
+      "name": "Jordania",
+      "code": "jo",
+      "emoji": "🇯🇴"
+    },
+    "away": {
+      "name": "Argelia",
+      "code": "dz",
+      "emoji": "🇩🇿"
+    },
+    "stage": "Fase de grupos",
+    "group": "Grupo J",
+    "venue": "Levi’s Stadium, San Francisco",
+    "result": null,
+    "note": ""
+  },
+  {
+    "id": 45,
+    "date": "2026-06-23",
+    "time": "13:00",
+    "datetime": "2026-06-23T13:00:00-04:00",
+    "home": {
+      "name": "Portugal",
+      "code": "pt",
+      "emoji": "🇵🇹"
+    },
+    "away": {
+      "name": "Uzbekistán",
+      "code": "uz",
+      "emoji": "🇺🇿"
+    },
+    "stage": "Fase de grupos",
+    "group": "Grupo K",
+    "venue": "NRG Stadium, Houston",
+    "result": null,
+    "note": ""
+  },
+  {
+    "id": 46,
+    "date": "2026-06-23",
+    "time": "16:00",
+    "datetime": "2026-06-23T16:00:00-04:00",
+    "home": {
+      "name": "Inglaterra",
+      "code": "gb-eng",
+      "emoji": "🏴"
+    },
+    "away": {
+      "name": "Ghana",
+      "code": "gh",
+      "emoji": "🇬🇭"
+    },
+    "stage": "Fase de grupos",
+    "group": "Grupo L",
+    "venue": "Gillette Stadium, Boston",
+    "result": null,
+    "note": ""
+  },
+  {
+    "id": 47,
+    "date": "2026-06-23",
+    "time": "19:00",
+    "datetime": "2026-06-23T19:00:00-04:00",
+    "home": {
+      "name": "Panamá",
+      "code": "pa",
+      "emoji": "🇵🇦"
+    },
+    "away": {
+      "name": "Croacia",
+      "code": "hr",
+      "emoji": "🇭🇷"
+    },
+    "stage": "Fase de grupos",
+    "group": "Grupo L",
+    "venue": "BMO Field, Toronto",
+    "result": null,
+    "note": ""
+  },
+  {
+    "id": 48,
+    "date": "2026-06-23",
+    "time": "22:00",
+    "datetime": "2026-06-23T22:00:00-04:00",
+    "home": {
+      "name": "Colombia",
+      "code": "co",
+      "emoji": "🇨🇴"
+    },
+    "away": {
+      "name": "RD Congo",
+      "code": "cd",
+      "emoji": "🇨🇩"
+    },
+    "stage": "Fase de grupos",
+    "group": "Grupo K",
+    "venue": "Estadio Akron, Guadalajara",
+    "result": null,
+    "note": ""
+  },
+  {
+    "id": 49,
+    "date": "2026-06-24",
+    "time": "15:00",
+    "datetime": "2026-06-24T15:00:00-04:00",
+    "home": {
+      "name": "Suiza",
+      "code": "ch",
+      "emoji": "🇨🇭"
+    },
+    "away": {
+      "name": "Canadá",
+      "code": "ca",
+      "emoji": "🇨🇦"
+    },
+    "stage": "Fase de grupos",
+    "group": "Grupo B",
+    "venue": "BC Place, Vancouver",
+    "result": null,
+    "note": ""
+  },
+  {
+    "id": 50,
+    "date": "2026-06-24",
+    "time": "15:00",
+    "datetime": "2026-06-24T15:00:00-04:00",
+    "home": {
+      "name": "Bosnia y Herzegovina",
+      "code": "ba",
+      "emoji": "🇧🇦"
+    },
+    "away": {
+      "name": "Catar",
+      "code": "qa",
+      "emoji": "🇶🇦"
+    },
+    "stage": "Fase de grupos",
+    "group": "Grupo B",
+    "venue": "Lumen Field, Seattle",
+    "result": null,
+    "note": ""
+  },
+  {
+    "id": 51,
+    "date": "2026-06-24",
+    "time": "18:00",
+    "datetime": "2026-06-24T18:00:00-04:00",
+    "home": {
+      "name": "Marruecos",
+      "code": "ma",
+      "emoji": "🇲🇦"
+    },
+    "away": {
+      "name": "Haití",
+      "code": "ht",
+      "emoji": "🇭🇹"
+    },
+    "stage": "Fase de grupos",
+    "group": "Grupo C",
+    "venue": "Mercedes-Benz Stadium, Atlanta",
+    "result": null,
+    "note": ""
+  },
+  {
+    "id": 52,
+    "date": "2026-06-24",
+    "time": "18:00",
+    "datetime": "2026-06-24T18:00:00-04:00",
+    "home": {
+      "name": "Brasil",
+      "code": "br",
+      "emoji": "🇧🇷"
+    },
+    "away": {
+      "name": "Escocia",
+      "code": "gb-sct",
+      "emoji": "🏴"
+    },
+    "stage": "Fase de grupos",
+    "group": "Grupo C",
+    "venue": "Hard Rock Stadium, Miami",
+    "result": null,
+    "note": ""
+  },
+  {
+    "id": 53,
+    "date": "2026-06-24",
+    "time": "21:00",
+    "datetime": "2026-06-24T21:00:00-04:00",
+    "home": {
+      "name": "Sudáfrica",
+      "code": "za",
+      "emoji": "🇿🇦"
+    },
+    "away": {
+      "name": "Corea del Sur",
+      "code": "kr",
+      "emoji": "🇰🇷"
+    },
+    "stage": "Fase de grupos",
+    "group": "Grupo A",
+    "venue": "Estadio BBVA, Monterrey",
+    "result": null,
+    "note": ""
+  },
+  {
+    "id": 54,
+    "date": "2026-06-24",
+    "time": "21:00",
+    "datetime": "2026-06-24T21:00:00-04:00",
+    "home": {
+      "name": "República Checa",
+      "code": "cz",
+      "emoji": "🇨🇿"
+    },
+    "away": {
+      "name": "México",
+      "code": "mx",
+      "emoji": "🇲🇽"
+    },
+    "stage": "Fase de grupos",
+    "group": "Grupo A",
+    "venue": "Estadio Azteca, Ciudad de México",
+    "result": null,
+    "note": ""
+  },
+  {
+    "id": 55,
+    "date": "2026-06-25",
+    "time": "16:00",
+    "datetime": "2026-06-25T16:00:00-04:00",
+    "home": {
+      "name": "Curazao",
+      "code": "cw",
+      "emoji": "🇨🇼"
+    },
+    "away": {
+      "name": "Costa de Marfil",
+      "code": "ci",
+      "emoji": "🇨🇮"
+    },
+    "stage": "Fase de grupos",
+    "group": "Grupo E",
+    "venue": "Lincoln Financial Field, Philadelphia",
+    "result": null,
+    "note": ""
+  },
+  {
+    "id": 56,
+    "date": "2026-06-25",
+    "time": "16:00",
+    "datetime": "2026-06-25T16:00:00-04:00",
+    "home": {
+      "name": "Ecuador",
+      "code": "ec",
+      "emoji": "🇪🇨"
+    },
+    "away": {
+      "name": "Alemania",
+      "code": "de",
+      "emoji": "🇩🇪"
+    },
+    "stage": "Fase de grupos",
+    "group": "Grupo E",
+    "venue": "MetLife Stadium, Nueva Jersey",
+    "result": null,
+    "note": ""
+  },
+  {
+    "id": 57,
+    "date": "2026-06-25",
+    "time": "19:00",
+    "datetime": "2026-06-25T19:00:00-04:00",
+    "home": {
+      "name": "Japón",
+      "code": "jp",
+      "emoji": "🇯🇵"
+    },
+    "away": {
+      "name": "Suecia",
+      "code": "se",
+      "emoji": "🇸🇪"
+    },
+    "stage": "Fase de grupos",
+    "group": "Grupo F",
+    "venue": "AT&T Stadium, Dallas",
+    "result": null,
+    "note": ""
+  },
+  {
+    "id": 58,
+    "date": "2026-06-25",
+    "time": "19:00",
+    "datetime": "2026-06-25T19:00:00-04:00",
+    "home": {
+      "name": "Túnez",
+      "code": "tn",
+      "emoji": "🇹🇳"
+    },
+    "away": {
+      "name": "Países Bajos",
+      "code": "nl",
+      "emoji": "🇳🇱"
+    },
+    "stage": "Fase de grupos",
+    "group": "Grupo F",
+    "venue": "Arrowhead Stadium, Kansas City",
+    "result": null,
+    "note": ""
+  },
+  {
+    "id": 59,
+    "date": "2026-06-25",
+    "time": "22:00",
+    "datetime": "2026-06-25T22:00:00-04:00",
+    "home": {
+      "name": "Paraguay",
+      "code": "py",
+      "emoji": "🇵🇾"
+    },
+    "away": {
+      "name": "Australia",
+      "code": "au",
+      "emoji": "🇦🇺"
+    },
+    "stage": "Fase de grupos",
+    "group": "Grupo D",
+    "venue": "Levi’s Stadium, San Francisco",
+    "result": null,
+    "note": ""
+  },
+  {
+    "id": 60,
+    "date": "2026-06-25",
+    "time": "22:00",
+    "datetime": "2026-06-25T22:00:00-04:00",
+    "home": {
+      "name": "Turquía",
+      "code": "tr",
+      "emoji": "🇹🇷"
+    },
+    "away": {
+      "name": "Estados Unidos",
+      "code": "us",
+      "emoji": "🇺🇸"
+    },
+    "stage": "Fase de grupos",
+    "group": "Grupo D",
+    "venue": "SoFi Stadium, Los Ángeles",
+    "result": null,
+    "note": ""
+  },
+  {
+    "id": 61,
+    "date": "2026-06-26",
+    "time": "15:00",
+    "datetime": "2026-06-26T15:00:00-04:00",
+    "home": {
+      "name": "Noruega",
+      "code": "no",
+      "emoji": "🇳🇴"
+    },
+    "away": {
+      "name": "Francia",
+      "code": "fr",
+      "emoji": "🇫🇷"
+    },
+    "stage": "Fase de grupos",
+    "group": "Grupo I",
+    "venue": "Gillette Stadium, Boston",
+    "result": null,
+    "note": ""
+  },
+  {
+    "id": 62,
+    "date": "2026-06-26",
+    "time": "15:00",
+    "datetime": "2026-06-26T15:00:00-04:00",
+    "home": {
+      "name": "Senegal",
+      "code": "sn",
+      "emoji": "🇸🇳"
+    },
+    "away": {
+      "name": "Irak",
+      "code": "iq",
+      "emoji": "🇮🇶"
+    },
+    "stage": "Fase de grupos",
+    "group": "Grupo I",
+    "venue": "BMO Field, Toronto",
+    "result": null,
+    "note": ""
+  },
+  {
+    "id": 63,
+    "date": "2026-06-26",
+    "time": "20:00",
+    "datetime": "2026-06-26T20:00:00-04:00",
+    "home": {
+      "name": "Cabo Verde",
+      "code": "cv",
+      "emoji": "🇨🇻"
+    },
+    "away": {
+      "name": "Arabia Saudita",
+      "code": "sa",
+      "emoji": "🇸🇦"
+    },
+    "stage": "Fase de grupos",
+    "group": "Grupo H",
+    "venue": "NRG Stadium, Houston",
+    "result": null,
+    "note": ""
+  },
+  {
+    "id": 64,
+    "date": "2026-06-26",
+    "time": "20:00",
+    "datetime": "2026-06-26T20:00:00-04:00",
+    "home": {
+      "name": "Uruguay",
+      "code": "uy",
+      "emoji": "🇺🇾"
+    },
+    "away": {
+      "name": "España",
+      "code": "es",
+      "emoji": "🇪🇸"
+    },
+    "stage": "Fase de grupos",
+    "group": "Grupo H",
+    "venue": "Estadio Akron, Guadalajara",
+    "result": null,
+    "note": ""
+  },
+  {
+    "id": 65,
+    "date": "2026-06-26",
+    "time": "23:00",
+    "datetime": "2026-06-26T23:00:00-04:00",
+    "home": {
+      "name": "Egipto",
+      "code": "eg",
+      "emoji": "🇪🇬"
+    },
+    "away": {
+      "name": "Irán",
+      "code": "ir",
+      "emoji": "🇮🇷"
+    },
+    "stage": "Fase de grupos",
+    "group": "Grupo G",
+    "venue": "Lumen Field, Seattle",
+    "result": null,
+    "note": ""
+  },
+  {
+    "id": 66,
+    "date": "2026-06-26",
+    "time": "23:00",
+    "datetime": "2026-06-26T23:00:00-04:00",
+    "home": {
+      "name": "Nueva Zelanda",
+      "code": "nz",
+      "emoji": "🇳🇿"
+    },
+    "away": {
+      "name": "Bélgica",
+      "code": "be",
+      "emoji": "🇧🇪"
+    },
+    "stage": "Fase de grupos",
+    "group": "Grupo G",
+    "venue": "BC Place, Vancouver",
+    "result": null,
+    "note": ""
+  },
+  {
+    "id": 67,
+    "date": "2026-06-27",
+    "time": "17:00",
+    "datetime": "2026-06-27T17:00:00-04:00",
+    "home": {
+      "name": "Croacia",
+      "code": "hr",
+      "emoji": "🇭🇷"
+    },
+    "away": {
+      "name": "Ghana",
+      "code": "gh",
+      "emoji": "🇬🇭"
+    },
+    "stage": "Fase de grupos",
+    "group": "Grupo L",
+    "venue": "Lincoln Financial Field, Philadelphia",
+    "result": null,
+    "note": ""
+  },
+  {
+    "id": 68,
+    "date": "2026-06-27",
+    "time": "17:00",
+    "datetime": "2026-06-27T17:00:00-04:00",
+    "home": {
+      "name": "Panamá",
+      "code": "pa",
+      "emoji": "🇵🇦"
+    },
+    "away": {
+      "name": "Inglaterra",
+      "code": "gb-eng",
+      "emoji": "🏴"
+    },
+    "stage": "Fase de grupos",
+    "group": "Grupo L",
+    "venue": "MetLife Stadium, Nueva Jersey",
+    "result": null,
+    "note": ""
+  },
+  {
+    "id": 69,
+    "date": "2026-06-27",
+    "time": "19:30",
+    "datetime": "2026-06-27T19:30:00-04:00",
+    "home": {
+      "name": "Colombia",
+      "code": "co",
+      "emoji": "🇨🇴"
+    },
+    "away": {
+      "name": "Portugal",
+      "code": "pt",
+      "emoji": "🇵🇹"
+    },
+    "stage": "Fase de grupos",
+    "group": "Grupo K",
+    "venue": "Hard Rock Stadium, Miami",
+    "result": null,
+    "note": ""
+  },
+  {
+    "id": 70,
+    "date": "2026-06-27",
+    "time": "19:30",
+    "datetime": "2026-06-27T19:30:00-04:00",
+    "home": {
+      "name": "RD Congo",
+      "code": "cd",
+      "emoji": "🇨🇩"
+    },
+    "away": {
+      "name": "Uzbekistán",
+      "code": "uz",
+      "emoji": "🇺🇿"
+    },
+    "stage": "Fase de grupos",
+    "group": "Grupo K",
+    "venue": "Mercedes-Benz Stadium, Atlanta",
+    "result": null,
+    "note": ""
+  },
+  {
+    "id": 71,
+    "date": "2026-06-27",
+    "time": "22:00",
+    "datetime": "2026-06-27T22:00:00-04:00",
+    "home": {
+      "name": "Argelia",
+      "code": "dz",
+      "emoji": "🇩🇿"
+    },
+    "away": {
+      "name": "Austria",
+      "code": "at",
+      "emoji": "🇦🇹"
+    },
+    "stage": "Fase de grupos",
+    "group": "Grupo J",
+    "venue": "Arrowhead Stadium, Kansas City",
+    "result": null,
+    "note": ""
+  },
+  {
+    "id": 72,
+    "date": "2026-06-27",
+    "time": "22:00",
+    "datetime": "2026-06-27T22:00:00-04:00",
+    "home": {
+      "name": "Jordania",
+      "code": "jo",
+      "emoji": "🇯🇴"
+    },
+    "away": {
+      "name": "Argentina",
+      "code": "ar",
+      "emoji": "🇦🇷"
+    },
+    "stage": "Fase de grupos",
+    "group": "Grupo J",
+    "venue": "AT&T Stadium, Dallas",
+    "result": null,
+    "note": ""
+  },
+  {
+    "id": 73,
+    "date": "2026-06-28",
+    "time": "15:00",
+    "datetime": "2026-06-28T15:00:00-04:00",
+    "home": {
+      "name": "2º Grupo A",
+      "code": "",
+      "emoji": "🏆"
+    },
+    "away": {
+      "name": "2º Grupo B",
+      "code": "",
+      "emoji": "🏆"
+    },
+    "stage": "16avos de final",
+    "group": "",
+    "venue": "Los Ángeles",
+    "result": null,
+    "note": ""
+  },
+  {
+    "id": 76,
+    "date": "2026-06-29",
+    "time": "13:00",
+    "datetime": "2026-06-29T13:00:00-04:00",
+    "home": {
+      "name": "1º Grupo C",
+      "code": "",
+      "emoji": "🏆"
+    },
+    "away": {
+      "name": "2º Grupo F",
+      "code": "",
+      "emoji": "🏆"
+    },
+    "stage": "16avos de final",
+    "group": "",
+    "venue": "Houston",
+    "result": null,
+    "note": ""
+  },
+  {
+    "id": 74,
+    "date": "2026-06-29",
+    "time": "16:30",
+    "datetime": "2026-06-29T16:30:00-04:00",
+    "home": {
+      "name": "1º Grupo E",
+      "code": "",
+      "emoji": "🏆"
+    },
+    "away": {
+      "name": "3º Grupo A/B/C/D/F",
+      "code": "",
+      "emoji": "🏆"
+    },
+    "stage": "16avos de final",
+    "group": "",
+    "venue": "Boston",
+    "result": null,
+    "note": ""
+  },
+  {
+    "id": 75,
+    "date": "2026-06-29",
+    "time": "21:00",
+    "datetime": "2026-06-29T21:00:00-04:00",
+    "home": {
+      "name": "1º Grupo F",
+      "code": "",
+      "emoji": "🏆"
+    },
+    "away": {
+      "name": "2º Grupo C",
+      "code": "",
+      "emoji": "🏆"
+    },
+    "stage": "16avos de final",
+    "group": "",
+    "venue": "Monterrey",
+    "result": null,
+    "note": ""
+  },
+  {
+    "id": 78,
+    "date": "2026-06-30",
+    "time": "13:00",
+    "datetime": "2026-06-30T13:00:00-04:00",
+    "home": {
+      "name": "2º Grupo E",
+      "code": "",
+      "emoji": "🏆"
+    },
+    "away": {
+      "name": "2º Grupo I",
+      "code": "",
+      "emoji": "🏆"
+    },
+    "stage": "16avos de final",
+    "group": "",
+    "venue": "Dallas",
+    "result": null,
+    "note": ""
+  },
+  {
+    "id": 77,
+    "date": "2026-06-30",
+    "time": "17:00",
+    "datetime": "2026-06-30T17:00:00-04:00",
+    "home": {
+      "name": "1º Grupo I",
+      "code": "",
+      "emoji": "🏆"
+    },
+    "away": {
+      "name": "3º Grupo C/D/F/G/H",
+      "code": "",
+      "emoji": "🏆"
+    },
+    "stage": "16avos de final",
+    "group": "",
+    "venue": "Nueva Jersey",
+    "result": null,
+    "note": ""
+  },
+  {
+    "id": 79,
+    "date": "2026-06-30",
+    "time": "21:00",
+    "datetime": "2026-06-30T21:00:00-04:00",
+    "home": {
+      "name": "1º Grupo A",
+      "code": "",
+      "emoji": "🏆"
+    },
+    "away": {
+      "name": "3º Grupo C/E/F/H/I",
+      "code": "",
+      "emoji": "🏆"
+    },
+    "stage": "16avos de final",
+    "group": "",
+    "venue": "Ciudad de México",
+    "result": null,
+    "note": ""
+  },
+  {
+    "id": 80,
+    "date": "2026-07-01",
+    "time": "12:00",
+    "datetime": "2026-07-01T12:00:00-04:00",
+    "home": {
+      "name": "1º Grupo L",
+      "code": "",
+      "emoji": "🏆"
+    },
+    "away": {
+      "name": "3º Grupo E/H/I/J/K",
+      "code": "",
+      "emoji": "🏆"
+    },
+    "stage": "16avos de final",
+    "group": "",
+    "venue": "Atlanta",
+    "result": null,
+    "note": ""
+  },
+  {
+    "id": 82,
+    "date": "2026-07-01",
+    "time": "16:00",
+    "datetime": "2026-07-01T16:00:00-04:00",
+    "home": {
+      "name": "1º Grupo G",
+      "code": "",
+      "emoji": "🏆"
+    },
+    "away": {
+      "name": "3º Grupo A/E/H/I/J",
+      "code": "",
+      "emoji": "🏆"
+    },
+    "stage": "16avos de final",
+    "group": "",
+    "venue": "Seattle",
+    "result": null,
+    "note": ""
+  },
+  {
+    "id": 81,
+    "date": "2026-07-01",
+    "time": "20:00",
+    "datetime": "2026-07-01T20:00:00-04:00",
+    "home": {
+      "name": "1º Grupo D",
+      "code": "",
+      "emoji": "🏆"
+    },
+    "away": {
+      "name": "3º Grupo B/E/F/I/J",
+      "code": "",
+      "emoji": "🏆"
+    },
+    "stage": "16avos de final",
+    "group": "",
+    "venue": "San Francisco",
+    "result": null,
+    "note": ""
+  },
+  {
+    "id": 84,
+    "date": "2026-07-02",
+    "time": "15:00",
+    "datetime": "2026-07-02T15:00:00-04:00",
+    "home": {
+      "name": "1º Grupo H",
+      "code": "",
+      "emoji": "🏆"
+    },
+    "away": {
+      "name": "2º Grupo J",
+      "code": "",
+      "emoji": "🏆"
+    },
+    "stage": "16avos de final",
+    "group": "",
+    "venue": "Los Ángeles",
+    "result": null,
+    "note": ""
+  },
+  {
+    "id": 83,
+    "date": "2026-07-02",
+    "time": "19:00",
+    "datetime": "2026-07-02T19:00:00-04:00",
+    "home": {
+      "name": "2º Grupo K",
+      "code": "",
+      "emoji": "🏆"
+    },
+    "away": {
+      "name": "2º Grupo L",
+      "code": "",
+      "emoji": "🏆"
+    },
+    "stage": "16avos de final",
+    "group": "",
+    "venue": "Toronto",
+    "result": null,
+    "note": ""
+  },
+  {
+    "id": 85,
+    "date": "2026-07-02",
+    "time": "23:00",
+    "datetime": "2026-07-02T23:00:00-04:00",
+    "home": {
+      "name": "1º Grupo B",
+      "code": "",
+      "emoji": "🏆"
+    },
+    "away": {
+      "name": "3º Grupo E/F/G/I/J",
+      "code": "",
+      "emoji": "🏆"
+    },
+    "stage": "16avos de final",
+    "group": "",
+    "venue": "Vancouver",
+    "result": null,
+    "note": ""
+  },
+  {
+    "id": 88,
+    "date": "2026-07-03",
+    "time": "14:00",
+    "datetime": "2026-07-03T14:00:00-04:00",
+    "home": {
+      "name": "2º Grupo D",
+      "code": "",
+      "emoji": "🏆"
+    },
+    "away": {
+      "name": "2º Grupo G",
+      "code": "",
+      "emoji": "🏆"
+    },
+    "stage": "16avos de final",
+    "group": "",
+    "venue": "Dallas",
+    "result": null,
+    "note": ""
+  },
+  {
+    "id": 86,
+    "date": "2026-07-03",
+    "time": "18:00",
+    "datetime": "2026-07-03T18:00:00-04:00",
+    "home": {
+      "name": "1º Grupo J",
+      "code": "",
+      "emoji": "🏆"
+    },
+    "away": {
+      "name": "2º Grupo H",
+      "code": "",
+      "emoji": "🏆"
+    },
+    "stage": "16avos de final",
+    "group": "",
+    "venue": "Miami",
+    "result": null,
+    "note": ""
+  },
+  {
+    "id": 87,
+    "date": "2026-07-03",
+    "time": "21:30",
+    "datetime": "2026-07-03T21:30:00-04:00",
+    "home": {
+      "name": "1º Grupo K",
+      "code": "",
+      "emoji": "🏆"
+    },
+    "away": {
+      "name": "3º Grupo D/E/I/J/L",
+      "code": "",
+      "emoji": "🏆"
+    },
+    "stage": "16avos de final",
+    "group": "",
+    "venue": "Kansas City",
+    "result": null,
+    "note": ""
+  },
+  {
+    "id": 90,
+    "date": "2026-07-04",
+    "time": "13:00",
+    "datetime": "2026-07-04T13:00:00-04:00",
+    "home": {
+      "name": "Ganador Partido 73",
+      "code": "",
+      "emoji": "🏆"
+    },
+    "away": {
+      "name": "Ganador Partido 75",
+      "code": "",
+      "emoji": "🏆"
+    },
+    "stage": "Octavos de final",
+    "group": "",
+    "venue": "Houston",
+    "result": null,
+    "note": ""
+  },
+  {
+    "id": 89,
+    "date": "2026-07-04",
+    "time": "17:00",
+    "datetime": "2026-07-04T17:00:00-04:00",
+    "home": {
+      "name": "Ganador Partido 74",
+      "code": "",
+      "emoji": "🏆"
+    },
+    "away": {
+      "name": "Ganador Partido 77",
+      "code": "",
+      "emoji": "🏆"
+    },
+    "stage": "Octavos de final",
+    "group": "",
+    "venue": "Philadelphia",
+    "result": null,
+    "note": ""
+  },
+  {
+    "id": 91,
+    "date": "2026-07-05",
+    "time": "16:00",
+    "datetime": "2026-07-05T16:00:00-04:00",
+    "home": {
+      "name": "Ganador Partido 76",
+      "code": "",
+      "emoji": "🏆"
+    },
+    "away": {
+      "name": "Ganador Partido 78",
+      "code": "",
+      "emoji": "🏆"
+    },
+    "stage": "Octavos de final",
+    "group": "",
+    "venue": "Nueva Jersey",
+    "result": null,
+    "note": ""
+  },
+  {
+    "id": 92,
+    "date": "2026-07-05",
+    "time": "20:00",
+    "datetime": "2026-07-05T20:00:00-04:00",
+    "home": {
+      "name": "Ganador Partido 79",
+      "code": "",
+      "emoji": "🏆"
+    },
+    "away": {
+      "name": "Ganador Partido 80",
+      "code": "",
+      "emoji": "🏆"
+    },
+    "stage": "Octavos de final",
+    "group": "",
+    "venue": "Ciudad de México",
+    "result": null,
+    "note": ""
+  },
+  {
+    "id": 93,
+    "date": "2026-07-06",
+    "time": "15:00",
+    "datetime": "2026-07-06T15:00:00-04:00",
+    "home": {
+      "name": "Ganador Partido 83",
+      "code": "",
+      "emoji": "🏆"
+    },
+    "away": {
+      "name": "Ganador Partido 84",
+      "code": "",
+      "emoji": "🏆"
+    },
+    "stage": "Octavos de final",
+    "group": "",
+    "venue": "Dallas",
+    "result": null,
+    "note": ""
+  },
+  {
+    "id": 94,
+    "date": "2026-07-06",
+    "time": "20:00",
+    "datetime": "2026-07-06T20:00:00-04:00",
+    "home": {
+      "name": "Ganador Partido 81",
+      "code": "",
+      "emoji": "🏆"
+    },
+    "away": {
+      "name": "Ganador Partido 82",
+      "code": "",
+      "emoji": "🏆"
+    },
+    "stage": "Octavos de final",
+    "group": "",
+    "venue": "Seattle",
+    "result": null,
+    "note": ""
+  },
+  {
+    "id": 95,
+    "date": "2026-07-07",
+    "time": "12:00",
+    "datetime": "2026-07-07T12:00:00-04:00",
+    "home": {
+      "name": "Ganador Partido 86",
+      "code": "",
+      "emoji": "🏆"
+    },
+    "away": {
+      "name": "Ganador Partido 88",
+      "code": "",
+      "emoji": "🏆"
+    },
+    "stage": "Octavos de final",
+    "group": "",
+    "venue": "Atlanta",
+    "result": null,
+    "note": ""
+  },
+  {
+    "id": 96,
+    "date": "2026-07-07",
+    "time": "16:00",
+    "datetime": "2026-07-07T16:00:00-04:00",
+    "home": {
+      "name": "Ganador Partido 85",
+      "code": "",
+      "emoji": "🏆"
+    },
+    "away": {
+      "name": "Ganador Partido 87",
+      "code": "",
+      "emoji": "🏆"
+    },
+    "stage": "Octavos de final",
+    "group": "",
+    "venue": "Vancouver",
+    "result": null,
+    "note": ""
+  },
+  {
+    "id": 97,
+    "date": "2026-07-09",
+    "time": "16:00",
+    "datetime": "2026-07-09T16:00:00-04:00",
+    "home": {
+      "name": "Ganador Partido 89",
+      "code": "",
+      "emoji": "🏆"
+    },
+    "away": {
+      "name": "Ganador Partido 90",
+      "code": "",
+      "emoji": "🏆"
+    },
+    "stage": "Cuartos de final",
+    "group": "",
+    "venue": "Boston",
+    "result": null,
+    "note": ""
+  },
+  {
+    "id": 98,
+    "date": "2026-07-10",
+    "time": "15:00",
+    "datetime": "2026-07-10T15:00:00-04:00",
+    "home": {
+      "name": "Ganador Partido 93",
+      "code": "",
+      "emoji": "🏆"
+    },
+    "away": {
+      "name": "Ganador Partido 94",
+      "code": "",
+      "emoji": "🏆"
+    },
+    "stage": "Cuartos de final",
+    "group": "",
+    "venue": "Los Ángeles",
+    "result": null,
+    "note": ""
+  },
+  {
+    "id": 99,
+    "date": "2026-07-11",
+    "time": "17:00",
+    "datetime": "2026-07-11T17:00:00-04:00",
+    "home": {
+      "name": "Ganador Partido 91",
+      "code": "",
+      "emoji": "🏆"
+    },
+    "away": {
+      "name": "Ganador Partido 92",
+      "code": "",
+      "emoji": "🏆"
+    },
+    "stage": "Cuartos de final",
+    "group": "",
+    "venue": "Miami",
+    "result": null,
+    "note": ""
+  },
+  {
+    "id": 100,
+    "date": "2026-07-11",
+    "time": "21:00",
+    "datetime": "2026-07-11T21:00:00-04:00",
+    "home": {
+      "name": "Ganador Partido 95",
+      "code": "",
+      "emoji": "🏆"
+    },
+    "away": {
+      "name": "Ganador Partido 96",
+      "code": "",
+      "emoji": "🏆"
+    },
+    "stage": "Cuartos de final",
+    "group": "",
+    "venue": "Kansas City",
+    "result": null,
+    "note": ""
+  },
+  {
+    "id": 101,
+    "date": "2026-07-14",
+    "time": "15:00",
+    "datetime": "2026-07-14T15:00:00-04:00",
+    "home": {
+      "name": "Ganador Partido 97",
+      "code": "",
+      "emoji": "🏆"
+    },
+    "away": {
+      "name": "Ganador Partido 98",
+      "code": "",
+      "emoji": "🏆"
+    },
+    "stage": "Semifinal",
+    "group": "",
+    "venue": "Dallas",
+    "result": null,
+    "note": ""
+  },
+  {
+    "id": 102,
+    "date": "2026-07-15",
+    "time": "15:00",
+    "datetime": "2026-07-15T15:00:00-04:00",
+    "home": {
+      "name": "Ganador Partido 99",
+      "code": "",
+      "emoji": "🏆"
+    },
+    "away": {
+      "name": "Ganador Partido 100",
+      "code": "",
+      "emoji": "🏆"
+    },
+    "stage": "Semifinal",
+    "group": "",
+    "venue": "Atlanta",
+    "result": null,
+    "note": ""
+  },
+  {
+    "id": 103,
+    "date": "2026-07-18",
+    "time": "17:00",
+    "datetime": "2026-07-18T17:00:00-04:00",
+    "home": {
+      "name": "Perdedor Partido 101",
+      "code": "",
+      "emoji": "🏆"
+    },
+    "away": {
+      "name": "Perdedor Partido 102",
+      "code": "",
+      "emoji": "🏆"
+    },
+    "stage": "Tercer puesto",
+    "group": "",
+    "venue": "Miami",
+    "result": null,
+    "note": ""
+  },
+  {
+    "id": 104,
+    "date": "2026-07-19",
+    "time": "15:00",
+    "datetime": "2026-07-19T15:00:00-04:00",
+    "home": {
+      "name": "Ganador Partido 101",
+      "code": "",
+      "emoji": "🏆"
+    },
+    "away": {
+      "name": "Ganador Partido 102",
+      "code": "",
+      "emoji": "🏆"
+    },
+    "stage": "Final",
+    "group": "",
+    "venue": "Nueva Jersey",
+    "result": null,
+    "note": ""
+  }
+];
+
+const $ = (sel) => document.querySelector(sel);
+const fixture = $("#fixture");
+const empty = $("#empty");
+let onlyUpcoming = false;
+
+const fmtDate = new Intl.DateTimeFormat("es-CL", {
+  timeZone: "America/Santiago",
+  weekday: "long",
+  day: "numeric",
+  month: "long"
+});
+
+const fmtShortDate = new Intl.DateTimeFormat("es-CL", {
+  timeZone: "America/Santiago",
+  day: "2-digit",
+  month: "2-digit"
+});
+
+const normalize = (txt) => (txt || "")
+  .toString()
+  .normalize("NFD")
+  .replace(/[\u0300-\u036f]/g, "")
+  .toLowerCase();
+
+function flagHTML(team, big = false) {
+  const cls = big ? "big-flag" : "flag";
+  const fallback = big ? "flag-fallback" : "flagEmoji";
+  if (!team.code) return `<span class="${fallback}" title="${team.name}">${team.emoji || "🏆"}</span>`;
+  const src = `https://flagcdn.com/w80/${team.code}.png`;
+  return `<img class="${cls}" src="${src}" alt="Bandera de ${team.name}" loading="lazy" onerror="this.outerHTML='<span class=&quot;${fallback}&quot; title=&quot;${team.name}&quot;>${team.emoji || "🏳️"}</span>'">`;
+}
+
+function matchDate(match) {
+  return new Date(match.datetime);
+}
+
+function statusOf(match, now = new Date()) {
+  const start = matchDate(match);
+  const end = new Date(start.getTime() + 130 * 60 * 1000);
+  if (now >= start && now <= end && !match.result) return "live";
+  if (now > end || match.result) return "done";
+  return "upcoming";
+}
+
+function nextMatch(now = new Date()) {
+  return MATCHES.find(m => statusOf(m, now) === "upcoming") || null;
+}
+
+function sameChileDate(a, b) {
+  return fmtShortDate.format(a) === fmtShortDate.format(b);
+}
+
+function countdown(target) {
+  const diff = target - new Date();
+  if (diff <= 0) return "Empieza pronto";
+  const mins = Math.floor(diff / 60000);
+  const days = Math.floor(mins / 1440);
+  const hours = Math.floor((mins % 1440) / 60);
+  const minutes = mins % 60;
+  if (days > 0) return `Faltan ${days}d ${hours}h`;
+  if (hours > 0) return `Faltan ${hours}h ${minutes}m`;
+  return `Faltan ${minutes}m`;
+}
+
+function renderNext() {
+  const now = new Date();
+  const next = nextMatch(now);
+  const nextContent = $("#nextContent");
+  if (!next) {
+    $("#nextStatus").textContent = "Torneo terminado";
+    nextContent.innerHTML = `<p class="subtitle">No quedan partidos programados en este fixture.</p>`;
+    return;
+  }
+  const d = matchDate(next);
+  $("#nextStatus").textContent = countdown(d);
+  nextContent.innerHTML = `
+    <div class="next-teams">
+      <div class="next-team">
+        ${flagHTML(next.home, true)}
+        <strong>${next.home.name}</strong>
+      </div>
+      <div class="vs">VS</div>
+      <div class="next-team">
+        ${flagHTML(next.away, true)}
+        <strong>${next.away.name}</strong>
+      </div>
+    </div>
+    <div class="next-time">
+      <div>Fecha<strong>${fmtDate.format(d)}</strong></div>
+      <div>Hora Chile<strong>${next.time}</strong></div>
+      <div>Fase<strong>${next.group || next.stage}</strong></div>
+      <div>Sede<strong>${next.venue}</strong></div>
+    </div>
+  `;
+}
+
+function matchCard(match, nextId) {
+  const status = statusOf(match);
+  const d = matchDate(match);
+  const isNext = match.id === nextId;
+  const statusLabel = status === "live" ? "En vivo / en curso" : status === "done" ? "Finalizado" : "Por jugar";
+  const meta = match.group || match.stage;
+  const score = match.result ? `<span class="score">${match.result}</span>` : `<span class="score">vs</span>`;
+  return `
+    <article class="match ${status} ${isNext ? "next" : ""}" id="match-${match.id}" data-id="${match.id}">
+      <div class="match-head">
+        <span class="match-no">Partido ${match.id}</span>
+        <span class="time">🕒 ${match.time}</span>
+      </div>
+      <div class="teams">
+        <div class="team">
+          ${flagHTML(match.home)}
+          <span class="team-name">${match.home.name}</span>
+        </div>
+        ${score}
+        <div class="team away">
+          <span class="team-name">${match.away.name}</span>
+          ${flagHTML(match.away)}
+        </div>
+      </div>
+      <div class="match-foot">
+        <span><span class="stage-tag">${meta}</span> · ${statusLabel}</span>
+        <span>${match.venue}</span>
+      </div>
+    </article>
+  `;
+}
+
+function render() {
+  const q = normalize($("#search").value);
+  const selectedStage = $("#stage").value;
+  const now = new Date();
+  const next = nextMatch(now);
+  const nextId = next ? next.id : null;
+
+  const filtered = MATCHES.filter(match => {
+    const status = statusOf(match, now);
+    if (onlyUpcoming && status === "done") return false;
+    if (selectedStage !== "all" && match.stage !== selectedStage) return false;
+    const haystack = normalize(`${match.home.name} ${match.away.name} ${match.group} ${match.stage} ${match.venue} ${match.time}`);
+    return haystack.includes(q);
+  });
+
+  const groups = new Map();
+  filtered.forEach(match => {
+    const key = match.date;
+    if (!groups.has(key)) groups.set(key, []);
+    groups.get(key).push(match);
+  });
+
+  fixture.innerHTML = "";
+  groups.forEach((items, date) => {
+    const firstDate = matchDate(items[0]);
+    const section = document.createElement("section");
+    section.className = "date-group";
+    section.innerHTML = `
+      <div class="date-title">
+        <h2>${fmtDate.format(firstDate)}</h2>
+        <span>${items.length} partido${items.length === 1 ? "" : "s"}</span>
+      </div>
+      <div class="grid">${items.map(m => matchCard(m, nextId)).join("")}</div>
+    `;
+    fixture.appendChild(section);
+  });
+
+  empty.classList.toggle("hidden", filtered.length > 0);
+
+  $("#statTotal").textContent = MATCHES.length;
+  $("#statUpcoming").textContent = MATCHES.filter(m => statusOf(m, now) !== "done").length;
+  $("#statToday").textContent = MATCHES.filter(m => sameChileDate(matchDate(m), now)).length;
+}
+
+function init() {
+  $("#search").addEventListener("input", render);
+  $("#stage").addEventListener("change", render);
+  $("#upcomingBtn").addEventListener("click", () => {
+    onlyUpcoming = !onlyUpcoming;
+    $("#upcomingBtn").setAttribute("aria-pressed", String(onlyUpcoming));
+    $("#upcomingBtn").textContent = onlyUpcoming ? "Ver todos" : "Ver solo próximos";
+    render();
+  });
+
+  renderNext();
+  render();
+
+  const next = nextMatch();
+  if (next) {
+    setTimeout(() => {
+      const el = document.getElementById(`match-${next.id}`);
+      if (el && window.innerWidth > 700) el.scrollIntoView({ block: "center", behavior: "smooth" });
+    }, 350);
+  }
+
+  setInterval(() => {
+    renderNext();
+    render();
+  }, 60000);
+}
+
+init();
+</script>
+</body>
+</html>
