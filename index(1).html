@@ -1,0 +1,617 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sebastián Escobar Flores · Portafolio</title>
+  <meta name="description" content="Portafolio profesional de Sebastián Escobar Flores, periodista y comunicador. Redacción, contenidos digitales, comunicación estratégica, SEO y edición audiovisual.">
+  <style>
+    :root {
+      --bg: #f6f4ef;
+      --paper: #fffdf8;
+      --ink: #1f252d;
+      --muted: #68717d;
+      --line: rgba(31, 37, 45, .12);
+      --accent: #7c3aed;
+      --accent-2: #f97316;
+      --soft: #ede7ff;
+      --soft-2: #fff0df;
+      --shadow: 0 24px 70px rgba(31, 37, 45, .10);
+      --radius: 26px;
+      --max: 1120px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top left, rgba(124, 58, 237, .16), transparent 32rem),
+        radial-gradient(circle at 85% 5%, rgba(249, 115, 22, .16), transparent 26rem),
+        linear-gradient(180deg, #f8f5ee 0%, #f6f4ef 55%, #fffdf8 100%);
+      font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.5;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    .wrap { width: min(var(--max), calc(100% - 32px)); margin: 0 auto; }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(18px);
+      background: rgba(246, 244, 239, .82);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .nav {
+      min-height: 68px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 900;
+      letter-spacing: -.03em;
+    }
+
+    .mark {
+      width: 34px;
+      height: 34px;
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      color: white;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      box-shadow: 0 12px 30px rgba(124, 58, 237, .22);
+    }
+
+    .navlinks {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--muted);
+      font-size: .94rem;
+      font-weight: 700;
+    }
+
+    .navlinks a {
+      padding: 8px 10px;
+      border-radius: 999px;
+    }
+
+    .navlinks a:hover { background: rgba(31, 37, 45, .06); color: var(--ink); }
+
+    .hero {
+      padding: 68px 0 44px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.25fr) minmax(280px, .75fr);
+      gap: 24px;
+      align-items: stretch;
+    }
+
+    .card {
+      border: 1px solid var(--line);
+      background: rgba(255, 253, 248, .74);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-main {
+      padding: clamp(28px, 5vw, 54px);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-main::after {
+      content: "";
+      position: absolute;
+      right: -90px;
+      bottom: -110px;
+      width: 280px;
+      height: 280px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, rgba(124, 58, 237, .16), rgba(249, 115, 22, .16));
+      filter: blur(2px);
+    }
+
+    .eyebrow {
+      margin: 0 0 14px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--accent);
+      font-weight: 900;
+      font-size: .82rem;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: var(--accent-2);
+    }
+
+    h1 {
+      margin: 0;
+      max-width: 780px;
+      font-size: clamp(2.45rem, 7vw, 5.8rem);
+      line-height: .92;
+      letter-spacing: -.075em;
+    }
+
+    .lead {
+      margin: 22px 0 0;
+      max-width: 700px;
+      color: var(--muted);
+      font-size: clamp(1.02rem, 2vw, 1.22rem);
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 28px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 44px;
+      padding: 0 16px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      font-weight: 900;
+      transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
+    }
+
+    .btn.primary {
+      color: white;
+      border: 0;
+      background: linear-gradient(135deg, var(--accent), #a855f7);
+      box-shadow: 0 16px 34px rgba(124, 58, 237, .24);
+    }
+
+    .btn:hover { transform: translateY(-2px); }
+    .btn.secondary { background: rgba(255,255,255,.54); }
+
+    .hero-side {
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .profile-box h2 {
+      margin: 0;
+      font-size: 1.1rem;
+      letter-spacing: -.03em;
+    }
+
+    .profile-box p {
+      margin: 10px 0 0;
+      color: var(--muted);
+    }
+
+    .mini-list {
+      display: grid;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .mini-item {
+      display: flex;
+      gap: 10px;
+      padding: 12px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.55);
+      border-radius: 18px;
+    }
+
+    .mini-item strong { display: block; }
+    .mini-item span { display: block; color: var(--muted); font-size: .92rem; }
+
+    section { padding: 24px 0; }
+
+    .section-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 18px;
+      margin-bottom: 16px;
+    }
+
+    .section-head h2 {
+      margin: 0;
+      font-size: clamp(1.55rem, 3vw, 2.35rem);
+      letter-spacing: -.055em;
+    }
+
+    .section-head p {
+      margin: 0;
+      color: var(--muted);
+      max-width: 560px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+
+    .grid.two { grid-template-columns: repeat(2, 1fr); }
+
+    .work {
+      padding: 22px;
+      min-height: 260px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform .18s ease, box-shadow .18s ease;
+    }
+
+    .work:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 30px 90px rgba(31, 37, 45, .14);
+    }
+
+    .tag {
+      display: inline-flex;
+      width: fit-content;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: var(--soft);
+      color: var(--accent);
+      font-size: .78rem;
+      font-weight: 900;
+    }
+
+    .tag.orange {
+      color: #b45309;
+      background: var(--soft-2);
+    }
+
+    .work h3 {
+      margin: 18px 0 10px;
+      font-size: 1.35rem;
+      line-height: 1.08;
+      letter-spacing: -.045em;
+    }
+
+    .work p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .work a {
+      margin-top: 20px;
+      display: inline-flex;
+      width: fit-content;
+      align-items: center;
+      gap: 6px;
+      color: var(--accent);
+      font-weight: 900;
+    }
+
+    .about {
+      padding: 28px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    .about p { margin: 0; color: var(--muted); }
+    .about p + p { margin-top: 14px; }
+
+    .skills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .chip {
+      padding: 9px 11px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255,255,255,.58);
+      color: #404854;
+      font-weight: 750;
+      font-size: .92rem;
+    }
+
+    .timeline {
+      display: grid;
+      gap: 12px;
+    }
+
+    .role {
+      padding: 18px;
+      display: grid;
+      grid-template-columns: 180px 1fr;
+      gap: 16px;
+    }
+
+    .role time {
+      color: var(--accent);
+      font-weight: 900;
+      font-size: .9rem;
+    }
+
+    .role h3 {
+      margin: 0;
+      font-size: 1.1rem;
+      letter-spacing: -.025em;
+    }
+
+    .role p {
+      margin: 6px 0 0;
+      color: var(--muted);
+    }
+
+    .contact {
+      margin: 26px 0 52px;
+      padding: clamp(26px, 5vw, 44px);
+      text-align: center;
+      background:
+        linear-gradient(135deg, rgba(124, 58, 237, .94), rgba(249, 115, 22, .90)),
+        var(--accent);
+      color: white;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .contact h2 {
+      margin: 0;
+      font-size: clamp(1.8rem, 4vw, 3.2rem);
+      letter-spacing: -.06em;
+    }
+
+    .contact p {
+      margin: 14px auto 0;
+      max-width: 650px;
+      color: rgba(255,255,255,.82);
+    }
+
+    .contact .actions { justify-content: center; }
+    .contact .btn {
+      background: rgba(255,255,255,.15);
+      border-color: rgba(255,255,255,.25);
+      color: white;
+    }
+
+    footer {
+      padding: 26px 0 40px;
+      color: var(--muted);
+      font-size: .92rem;
+      border-top: 1px solid var(--line);
+    }
+
+    @media (max-width: 860px) {
+      .hero,
+      .about,
+      .grid,
+      .grid.two,
+      .role {
+        grid-template-columns: 1fr;
+      }
+
+      .nav {
+        align-items: flex-start;
+        flex-direction: column;
+        padding: 14px 0;
+      }
+
+      .navlinks {
+        width: 100%;
+        overflow-x: auto;
+        padding-bottom: 2px;
+      }
+
+      .hero { padding-top: 34px; }
+      .section-head { align-items: flex-start; flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <nav class="wrap nav" aria-label="Navegación principal">
+      <a class="brand" href="#inicio" aria-label="Ir al inicio">
+        <span class="mark">SE</span>
+        <span>Sebastián Escobar</span>
+      </a>
+      <div class="navlinks">
+        <a href="#trabajos">Trabajos</a>
+        <a href="#perfil">Perfil</a>
+        <a href="#experiencia">Experiencia</a>
+        <a href="#contacto">Contacto</a>
+      </div>
+    </nav>
+  </div>
+
+  <header id="inicio" class="wrap hero">
+    <div class="card hero-main">
+      <p class="eyebrow"><span class="dot"></span>Periodista · Contenidos · Comunicaciones</p>
+      <h1>Escribo, edito y transformo ideas en contenidos claros.</h1>
+      <p class="lead">
+        Soy periodista y licenciado en Comunicación Social. Trabajo en redacción, edición, contenidos digitales, SEO,
+        comunicación estratégica y piezas audiovisuales para plataformas digitales.
+      </p>
+      <div class="actions">
+        <a class="btn primary" href="#trabajos">Ver portafolio</a>
+        <a class="btn secondary" href="mailto:sebastiansef@gmail.com">Contactarme</a>
+      </div>
+    </div>
+
+    <aside class="card hero-side" aria-label="Resumen profesional">
+      <div class="profile-box">
+        <h2>En pocas palabras</h2>
+        <p>
+          Combino mirada periodística, criterio editorial y sensibilidad digital para crear contenidos con propósito,
+          claridad y buen ritmo.
+        </p>
+      </div>
+
+      <div class="mini-list">
+        <div class="mini-item">
+          <strong>📰</strong>
+          <span><strong>Redacción y edición</strong>Notas, entrevistas, perfiles y contenidos institucionales.</span>
+        </div>
+        <div class="mini-item">
+          <strong>📱</strong>
+          <span><strong>Digital y redes</strong>SEO, formatos breves, grillas, copies y adaptación de mensajes.</span>
+        </div>
+        <div class="mini-item">
+          <strong>🎬</strong>
+          <span><strong>Audiovisual</strong>Edición en Premiere, CapCut, Canva y herramientas de audio.</span>
+        </div>
+      </div>
+    </aside>
+  </header>
+
+  <main>
+    <section id="trabajos" class="wrap">
+      <div class="section-head">
+        <h2>Trabajos destacados</h2>
+        <p>Una selección breve y ordenada de proyectos periodísticos, digitales y comunicacionales.</p>
+      </div>
+
+      <div class="grid">
+        <article class="card work">
+          <div>
+            <span class="tag">Periodismo</span>
+            <h3>Notas y coberturas digitales</h3>
+            <p>Redacción informativa, verificación de antecedentes, cobertura bajo presión y adaptación SEO para plataformas digitales.</p>
+          </div>
+          <a href="#" aria-label="Ver trabajos de periodismo">Agregar enlace →</a>
+        </article>
+
+        <article class="card work">
+          <div>
+            <span class="tag orange">Investigación</span>
+            <h3>Reportajes universitarios</h3>
+            <p>Investigaciones sobre políticas públicas, cultura comunitaria y transporte rural, con entrevistas, datos y enfoque territorial.</p>
+          </div>
+          <a href="#" aria-label="Ver reportajes universitarios">Agregar enlace →</a>
+        </article>
+
+        <article class="card work">
+          <div>
+            <span class="tag">Comunicación digital</span>
+            <h3>Contenido para redes</h3>
+            <p>Piezas gráficas, videos, copies, campañas y propuestas de comunicación para audiencias digitales.</p>
+          </div>
+          <a href="#" aria-label="Ver trabajos de comunicación digital">Agregar enlace →</a>
+        </article>
+      </div>
+    </section>
+
+    <section id="perfil" class="wrap">
+      <div class="section-head">
+        <h2>Perfil</h2>
+        <p>Una mirada simple sobre cómo trabajo y qué puedo aportar.</p>
+      </div>
+
+      <div class="card about">
+        <div>
+          <p>
+            Me interesa la comunicación que logra explicar bien, conectar con las personas y adaptarse al contexto.
+            Vengo del periodismo, pero mi foco actual está en crecer hacia áreas de comunicación corporativa,
+            contenidos, comunicación interna, asuntos públicos y estrategia digital.
+          </p>
+          <p>
+            Tengo experiencia trabajando con información sensible, tiempos ajustados y distintos formatos.
+            Me acomoda investigar, ordenar ideas, escribir con claridad y convertir temas complejos en mensajes entendibles.
+          </p>
+        </div>
+
+        <div>
+          <div class="skills">
+            <span class="chip">Redacción</span>
+            <span class="chip">Edición</span>
+            <span class="chip">SEO</span>
+            <span class="chip">Storytelling</span>
+            <span class="chip">Comunicación estratégica</span>
+            <span class="chip">Redes sociales</span>
+            <span class="chip">Premiere</span>
+            <span class="chip">CapCut</span>
+            <span class="chip">Canva</span>
+            <span class="chip">Audacity/Audition</span>
+            <span class="chip">Métricas digitales</span>
+            <span class="chip">Inglés avanzado</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="experiencia" class="wrap">
+      <div class="section-head">
+        <h2>Experiencia</h2>
+        <p>Un resumen directo de mi recorrido profesional.</p>
+      </div>
+
+      <div class="timeline">
+        <article class="card role">
+          <time>2025 — Actualidad</time>
+          <div>
+            <h3>Periodista · La Tercera / Grupo Copesa</h3>
+            <p>Redacción, edición, cobertura de actualidad, verificación de información, SEO y trabajo bajo presión en plataformas digitales.</p>
+          </div>
+        </article>
+
+        <article class="card role">
+          <time>2025</time>
+          <div>
+            <h3>Periodista practicante · La Tercera</h3>
+            <p>Apoyo en cobertura digital, monitoreo de fuentes, redacción de notas y coordinación con editores.</p>
+          </div>
+        </article>
+
+        <article class="card role">
+          <time>Comunicación digital</time>
+          <div>
+            <h3>Community Manager · Óptica Rois</h3>
+            <p>Creación de piezas gráficas y audiovisuales, gestión de redes sociales, campañas, contenidos y reportes de desempeño.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="contacto" class="wrap">
+      <div class="card contact">
+        <h2>¿Trabajamos juntos?</h2>
+        <p>
+          Estoy abierto a oportunidades en comunicación corporativa, contenidos digitales, comunicación interna,
+          prensa, asuntos públicos, redes sociales y producción editorial.
+        </p>
+        <div class="actions">
+          <a class="btn" href="mailto:sebastiansef@gmail.com">Enviar correo</a>
+          <a class="btn" href="#" aria-label="Agregar enlace a LinkedIn">LinkedIn</a>
+          <a class="btn" href="#" aria-label="Agregar enlace al CV">Descargar CV</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="wrap">
+    <p>© <span id="year"></span> Sebastián Escobar Flores. Portafolio profesional.</p>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
